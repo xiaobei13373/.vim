@@ -87,72 +87,102 @@ map tl :+tabnext<CR>
 map sv <C-w>t<C-w>H
 map sh <C-w>t<C-w>K
 
+" =============================================================================
+" 插件配置 (使用 vim-plug 管理)
+" =============================================================================
 call plug#begin('~/.vim/plugged')
 
+" --- 状态栏与主题 ---
+" vim-airline: 强大的状态栏插件，显示模式、文件名、git 分支等信息
 Plug 'vim-airline/vim-airline'
+" vim-snazzy: Snazzy 配色主题，色彩鲜艳现代
 Plug 'connorholyday/vim-snazzy'
 
-
-
-" File navigation
+" --- 文件导航 ---
+" NERDTree: 文件树导航插件，可侧边栏显示项目文件结构
+" 'on': 'NERDTreeToggle' 表示仅在调用命令时加载，提高启动速度
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
+" nerdtree-git-plugin: 在 NERDTree 中显示 git 状态（修改、新增、删除等）
 Plug 'Xuyuanp/nerdtree-git-plugin'
 
-" Taglist
+" --- 代码结构导航 ---
+" Tagbar: 显示代码标签列表（函数、类、变量等），支持多种语言
+" 'on': 'TagbarOpenAutoClose' 表示按需加载
 Plug 'majutsushi/tagbar', { 'on': 'TagbarOpenAutoClose' }
 
-" Error checking
+" --- 代码检查 ---
+" ALE (Asynchronous Lint Engine): 异步代码检查，支持多种语言的 lint 和修复
 Plug 'w0rp/ale'
 
-" Auto Complete
+" --- 自动补全 ---
+" YouCompleteMe: 强大的代码补全引擎（当前已禁用，需要编译安装）
 " Plug 'Valloric/YouCompleteMe'
 
-" Undo Tree
+" --- 撤销树 ---
+" Undotree: 可视化的撤销历史树，可回溯到任意历史状态
 Plug 'mbbill/undotree/'
 
-" Other visual enhancement
+" --- 视觉增强 ---
+" vim-indent-guides: 显示缩进参考线，帮助识别代码块结构
 Plug 'nathanaelkane/vim-indent-guides'
+" vim-cursorword: 自动高亮当前光标下的单词，方便查看重复出现的变量名
 Plug 'itchyny/vim-cursorword'
 
-" Git
+" --- Git 工具 ---
+" conflict-marker.vim: 高亮显示 git 合并冲突标记
 Plug 'rhysd/conflict-marker.vim'
+" vim-fugitive: 强大的 git 集成插件，可在 vim 内执行 git 操作
 Plug 'tpope/vim-fugitive'
+" vim-signify: 在符号栏显示 git 修改标记（新增、修改、删除的行）
 Plug 'mhinz/vim-signify'
+" vim-gitignore: 为 gitignore 文件提供语法高亮和自动补全
 Plug 'gisphm/vim-gitignore', { 'for': ['gitignore', 'vim-plug'] }
 
-" HTML, CSS, JavaScript, PHP, JSON, etc.
-Plug 'elzr/vim-json'
-Plug 'hail2u/vim-css3-syntax'
-Plug 'spf13/PIV', { 'for' :['php', 'vim-plug'] }
-Plug 'gko/vim-coloresque', { 'for': ['vim-plug', 'php', 'html', 'javascript', 'css', 'less'] }
-Plug 'pangloss/vim-javascript', { 'for' :['javascript', 'vim-plug'] }
-Plug 'mattn/emmet-vim'
-
-" Python
+" --- Python 开发 ---
+" indentpython.vim: Python 缩进规则增强
 Plug 'vim-scripts/indentpython.vim'
 
-" Markdown
+" --- Markdown 写作 ---
+" markdown-preview.nvim: Markdown 实时预览，在浏览器中同步显示渲染效果
+" 'do': 安装时执行回调函数进行插件安装
 Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install_sync() }, 'for' :['markdown', 'vim-plug'] }
+" vim-table-mode: 表格模式，自动格式化文本表格
+" 'on': 'TableModeToggle' 表示按需加载
 Plug 'dhruvasagar/vim-table-mode', { 'on': 'TableModeToggle' }
+" vimwiki: 个人维基系统，用于知识管理和笔记
 Plug 'vimwiki/vimwiki'
 
-" Bookmarks
+" --- 书签 ---
+" vim-signature: 管理 vim 书签（marks），可快速跳转和标记位置
 Plug 'kshenoy/vim-signature'
 
-" Other useful utilities
+" --- 效率工具 ---
+" vim-multiple-cursors: 多光标编辑，类似 Sublime Text 的多重选择功能
 Plug 'terryma/vim-multiple-cursors'
-Plug 'junegunn/goyo.vim' " distraction free writing mode
-Plug 'tpope/vim-surround' " type ysks' to wrap the word with '' or type cs'` to change 'word' to `word`
-Plug 'godlygeek/tabular' " type ;Tabularize /= to align the =
-Plug 'gcmt/wildfire.vim' " in Visual mode, type i' to select all text in '', or type i) i] i} ip
-Plug 'scrooloose/nerdcommenter' " in <space>cc to comment a line
+" goyo.vim: 专注写作模式，隐藏干扰元素，居中显示内容
+Plug 'junegunn/goyo.vim'
+" vim-surround: 快速操作周围字符（如添加/修改括号、引号等）
+" 用法示例：ysks' 用单引号包裹单词，cs'` 将单引号改为反引号
+Plug 'tpope/vim-surround'
+" Tabular: 文本对齐工具，可按指定字符对齐代码
+" 用法示例：选中代码后输入 :Tabularize /= 按等号对齐
+Plug 'godlygeek/tabular'
+" wildfire.vim: 智能选择文本对象（如引号、括号内的内容）
+" 用法示例：在可视模式下输入 i' 选择引号内文本，i) i] i} ip 类似
+Plug 'gcmt/wildfire.vim'
+" NERDCommenter: 快速注释插件，支持多种语言
+" 用法示例：<space>cc 注释当前行，<space>c<space> 切换注释状态
+Plug 'scrooloose/nerdcommenter'
 
-" Dependencies
+" --- 依赖插件 ---
+" vim-addon-mw-utils: vim-addon 系列工具集，部分插件的依赖
 Plug 'MarcWeber/vim-addon-mw-utils'
+" vim-textobj-user: 自定义文本对象的基础库
 Plug 'kana/vim-textobj-user'
+" vim-FIGlet: 生成 FIGlet ASCII 艺术字体
 Plug 'fadein/vim-FIGlet'
 
-
+" 结束插件配置
 call plug#end()
 
 let g:SnazzyTransparent = 1
